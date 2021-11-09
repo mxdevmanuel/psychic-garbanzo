@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
 import {
   GetStaticProps,
   GetStaticPropsContext,
@@ -6,7 +6,7 @@ import {
 } from "next";
 import { Country } from "@datatypes/countries";
 import { Question } from "@datatypes/question";
-import { CountriesClient } from "@data/countries";
+import { CountriesClient, getOptions } from "@data/countries";
 import Head from "next/head";
 
 interface HomeProps {
@@ -27,7 +27,7 @@ export default function Home({ countries }: HomeProps) {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div
+      <main
         className="font-poppins flex flex-col items-center justify-center min-h-screen py-2"
         style={{
           backgroundImage: "url(/images/background.png)",
@@ -36,8 +36,8 @@ export default function Home({ countries }: HomeProps) {
           backgroundSize: "cover",
         }}
       >
-        <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center"></main>
-      </div>
+        <div className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center"></div>
+      </main>
     </Fragment>
   );
 }
