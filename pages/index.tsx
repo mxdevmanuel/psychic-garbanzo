@@ -40,8 +40,8 @@ export default function Home({ countries }: HomeProps) {
   return (
     <Fragment>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Country Quiz</title>
+        <link rel="icon" href="/images/undraw_adventure_4hum 1.svg" />
       </Head>
       <GameContext.Provider value={{ dispatch, state }}>
         <main
