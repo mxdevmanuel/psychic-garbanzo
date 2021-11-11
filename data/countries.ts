@@ -2,6 +2,7 @@ import HttpClient from "@data/client";
 import { Country } from "@datatypes/countries";
 import { AxiosResponse } from "axios";
 import isNil from "lodash/isNil";
+import random from "lodash/random";
 
 export class CountriesClient extends HttpClient {
   public constructor() {
@@ -28,12 +29,12 @@ export function getOptions(
 ): Country[] {
   const options: Country[] = [];
   for (let index = 0; index < amount; index++) {
-    let r0 = Math.floor(Math.random() * (countries.length - 1));
+    let r0 = random(countries.length - 1);
     if (!isNil(avoid) && r0 === avoid) {
       index--;
       continue;
     }
-    options.push(countries[index]);
+    options.push(countries[r0]);
   }
   return options;
 }

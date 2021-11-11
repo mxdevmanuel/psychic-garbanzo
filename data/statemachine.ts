@@ -1,4 +1,4 @@
-import { Question } from "@datatypes/question";
+import { Question, QuestionType } from "@datatypes/question";
 import { Country } from "@datatypes/countries";
 import { generateQuestion } from "@data/questions";
 import { createContext, Dispatch } from "react";
@@ -17,21 +17,13 @@ export type Action =
   | { type: "gameover" }
   | { type: "reset" };
 
-export interface IGameContext {
-  dispatch: Dispatch<Action>;
-}
-
-export const GameContext = createContext<IGameContext>({
-  dispatch: () => {
-    console.log("default");
-  },
-});
-
 // TODO(mxdevmanuel): Consider refactoring with immerjs
 export const reducer = (state: Draft<State>, action: Action): void => {
   switch (action.type) {
     case "reset":
       state.score = 0;
+      state.gameover = false;
+      state.current = generateQuestion(state.countries);
       break;
     case "setnext":
       state.current = generateQuestion(state.countries);
@@ -44,3 +36,25 @@ export const reducer = (state: Draft<State>, action: Action): void => {
       break;
   }
 };
+
+export interface IGameContext {
+  dispatch: Dispatch<Action>;
+  state: State;
+}
+
+export const GameContext = createContext<IGameContext>({
+  dispatch: (_action: Action) => {
+    console.log("default");
+  },
+  state: {
+    current: {
+      text: "",
+      options: [],
+      answer: "",
+      type: QuestionType.FLAG,
+    },
+    countries: [],
+    gameover: true,
+    score: 0,
+  },
+});
