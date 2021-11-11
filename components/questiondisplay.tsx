@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { GameContext, IGameContext } from "@data/statemachine";
 import { Question, QuestionType } from "@datatypes/question";
+import { CircleX, CircleCheck } from "@components/icons";
 import clsx from "clsx";
 
 interface QuestionDisplayProps {
@@ -29,7 +30,7 @@ export default function QuestionDisplay({ question }: QuestionDisplayProps) {
             if (selected === null) setSelected(option);
           }}
           className={clsx(
-            "w-full rounded-xl border-4 cursor-pointer px-5 py-3 my-2 text-xl text-left",
+            "w-full rounded-xl border-4 cursor-pointer px-5 py-3 my-2 text-xl text-left relative",
             selected === null &&
               "hover:bg-yellow-400 hover:text-white hover:border-yellow-400",
             (selected === null ||
@@ -53,6 +54,12 @@ export default function QuestionDisplay({ question }: QuestionDisplayProps) {
           )}
         >
           <span className="font-bold mr-5">{indexes[index]}</span> {option}
+          {selected && option === question.answer && (
+            <CircleCheck className="absolute h-9 w-9 right-5 top-2" />
+          )}
+          {selected && option === selected && option !== question.answer && (
+            <CircleX className="absolute h-9 w-9 right-5 top-2" />
+          )}
         </div>
       ))}
       {selected && (
