@@ -17,7 +17,6 @@ export type Action =
   | { type: "gameover" }
   | { type: "reset" };
 
-// TODO(mxdevmanuel): Consider refactoring with immerjs
 export const reducer = (state: Draft<State>, action: Action): void => {
   switch (action.type) {
     case "reset":
@@ -43,7 +42,7 @@ export interface IGameContext {
 }
 
 export const GameContext = createContext<IGameContext>({
-  dispatch: (_action: Action) => {
+  dispatch: (action: Action) => {
     console.log("default");
   },
   state: {
